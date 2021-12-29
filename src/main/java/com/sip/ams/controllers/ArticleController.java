@@ -33,7 +33,7 @@ public class ArticleController {
     public List<Article> getAllArticles() {
         return (List<Article>) articleRepository.findAll();
     }
-    @GetMapping("/{id}/")
+    @GetMapping("/{id}")
     public Optional<Article> getArticleById(@PathVariable(value = "id") Long id) {
         return  articleRepository.findById(id);
     }

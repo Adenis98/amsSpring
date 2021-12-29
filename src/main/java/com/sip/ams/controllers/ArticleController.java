@@ -8,6 +8,7 @@ import com.sip.ams.entities.Article;
 import com.sip.ams.repositories.ArticleRepository;
 import com.sip.ams.repositories.ProviderRepository;
 import java.util.List;
+import java.util.Optional;
 import javax.validation.Valid;
 
 @RestController
@@ -32,7 +33,10 @@ public class ArticleController {
     public List<Article> getAllArticles() {
         return (List<Article>) articleRepository.findAll();
     }
-
+    @GetMapping("/{id}/")
+    public Optional<Article> getArticleById(@PathVariable(value = "id") Long id) {
+        return  articleRepository.findById(id);
+    }
     @PostMapping("/add/{providerId}")
     Article createArticle(@PathVariable(value = "providerId") Long providerId, @Valid @RequestBody Article article) {
         return providerRepository.findById(providerId).map(provider -> {
